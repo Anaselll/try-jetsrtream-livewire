@@ -16,7 +16,7 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next,$role): Response
     {
-         if (!Gate::allows('role', $role)) {
+        if (!Gate::allows('role', $role)) {
             return redirect()->route('dashboard');  
         }
 

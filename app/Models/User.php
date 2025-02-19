@@ -66,13 +66,15 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-    public function role(){ //user has one role 
+    public function role() { //user has one role 
         return $this->belongsTo(Role::class);
     }
-    public function formations(){ // formateur has many formations
+
+    public function formations() { // formateur has many formations
         return $this->hasMany(Formation::class);
     }
-    public function inscriptions(){ // apprenant can inscrit au pluesieur formations
+
+    public function inscriptions(){ // apprenant peut inscrire au plusieur formations
         return $this->belongsToMany(Formation::class);
     }
    

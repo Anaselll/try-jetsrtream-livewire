@@ -1,16 +1,17 @@
-<?php 
+<?php
+
 namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Formation;
+use App\Models\User;
 
 class DashboardAdmin extends Component
 {
     public $section = 'formationsAvailable';
     public $title, $description, $user_id;
     public $formations = [];
-
-    protected $listeners = ['changeSection' => 'changeSection'];
+    public $formateurs = []; // Define as public property
 
     protected $rules = [
         'title' => 'required|string|max:255',
@@ -31,12 +32,13 @@ class DashboardAdmin extends Component
 
     public function loadFormations()
     {
-        $this->formations = Formation::all();
+        $this->formations = Formation::latest()->get();
     }
 
     public function mount()
     {
         $this->loadFormations(); 
+        $this->formateurs = User::where('role_id', 3)->pluck('name', 'id'); // Fetch formateurs
     }
 
     public function creer_formation()
@@ -55,6 +57,6 @@ class DashboardAdmin extends Component
 
     public function render()
     {
-        return view('livewire.dashboard-admin');
+        return view('livewire.dashboard-admin', ['formateurs' => $this->formateurs])->layout('layouts.app');
     }
 }

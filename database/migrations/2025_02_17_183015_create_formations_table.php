@@ -13,12 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('formations', function (Blueprint $table) {
-             $table->id();
+            $table->id();
             $table->string('title');
             $table->string('description');
             $table->foreignIdFor(User::class);
-
-
             $table->timestamps();
         });
     }

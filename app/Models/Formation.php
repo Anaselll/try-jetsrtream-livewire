@@ -8,10 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Formation extends Model
 {
     use HasFactory;
-    protected $fillable = ["title","user_id","description"];
+
+    protected $fillable = [
+        "title",
+        "user_id",
+        "description"
+    ];
+
     public function user(){ //belong to one formateur
         return $this->belongsTo(User::class);
     }
+    
     public function apprenants(){ // formations belongs to many apprenants
         return $this->belongsToMany(User::class);
     }
